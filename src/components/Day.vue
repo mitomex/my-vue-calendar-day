@@ -33,6 +33,10 @@ const dayTimes = () => {
   }
 };
 
+const toDoubleDigit = item => {
+  return item < 10 ? "0" + item : item;
+};
+
 export default {
   data() {
     return {
@@ -51,12 +55,9 @@ export default {
   computed: {},
   methods: {
     updateTime(date) {
-      this.currentTime.hour =
-        date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-      this.currentTime.minute =
-        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-      this.currentTime.second =
-        date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      this.currentTime.hour = toDoubleDigit(date.getHours());
+      this.currentTime.minute = toDoubleDigit(date.getMinutes());
+      this.currentTime.second = toDoubleDigit(date.getSeconds());
 
       setTimeout(() => {
         this.updateTime(new Date());
