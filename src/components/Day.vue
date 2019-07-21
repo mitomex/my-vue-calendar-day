@@ -1,18 +1,24 @@
 <template>
-  <div>
-    <p>
-      <span>Current time:</span>
-      <span>{{ currentTime.hour }}:</span>
-      <span>{{ currentTime.minute }}:</span>
-      <span>{{ currentTime.second }}</span>
-    </p>
-    <div class="day">
-      <div class="label">
-        <TimeLabel :items="items" />
-      </div>
-      <div class="data">
-        <Hour :items="items" />
-        <div class="vertical"></div>
+  <div class="day">
+    <div class="header">
+      <p>
+        <span>Current time:</span>
+        <span>{{ currentTime.hour }}:</span>
+        <span>{{ currentTime.minute }}:</span>
+        <span>{{ currentTime.second }}</span>
+      </p>
+    </div>
+    <div class="main">
+      <div class="presentation">
+        <div class="presentation-inner">
+          <div class="label">
+            <TimeLabel :items="items" />
+          </div>
+          <div class="data">
+            <Hour :items="items" />
+            <div class="vertical"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -73,7 +79,40 @@ export default {
 
 <style lang="scss" scoped>
 .day {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.main {
+  position: absolute;
+  top: 63px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.presentation {
+  overflow-x: auto;
+  overflow-y: scroll;
+  position: relative;
+  height: 100%;
+
+  /* always display a scrollbar. */
+  &::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #dadce0;
+    border: 4px solid #fff;
+    border-radius: 8px;
+  }
+}
+.presentation-inner {
   display: flex;
+  flex: 1 1 auto;
 }
 .label {
   display: inline-flex;
