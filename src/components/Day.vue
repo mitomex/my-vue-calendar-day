@@ -17,6 +17,7 @@
           <div class="data">
             <Hour :items="items" />
             <div class="vertical"></div>
+            <div class="current" :style="{ top: positionY + 'px' }"></div>
           </div>
         </div>
       </div>
@@ -58,7 +59,16 @@ export default {
     TimeLabel,
     Hour
   },
-  computed: {},
+  computed: {
+    currentMinutes() {
+      return (
+        parseInt(this.currentTime.hour) * 60 + parseInt(this.currentTime.minute)
+      );
+    },
+    positionY() {
+      return (this.currentMinutes * 1152) / (24 * 60);
+    }
+  },
   methods: {
     updateTime(date) {
       this.currentTime.hour = toDoubleDigit(date.getHours());
@@ -127,5 +137,12 @@ export default {
 .vertical {
   border-right: 1px solid #dadce0;
   width: 8px;
+}
+.current {
+  background-color: red;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
 }
 </style>
